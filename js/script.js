@@ -36,8 +36,76 @@ const classe61 = ['Domenico Agostino',
 'Sebastiano Visco'
 ];
 
-//console.log('classe61.length',classe61.length);
+const bottoneEstrai = document.getElementById('estrai');
 
+
+// elenco di nomi estratti che di defaul è vuoto
+const nomiEstratti = [];
+bottoneEstrai.addEventListener('click', function(){
+
+  let nomeEstratto; // mi serve per il check del ciclo do while
+  let nome; // il nome che viene estratto
+
+  do{
+    bottoneEstrai.innerHTML = 'Estrai';
+
+    // se ho cliccato alla fine su ricomincia l'array nomiEstratti sarà più lungo di quello originale
+    // quindi lo svuoto
+    if(nomiEstratti.length > classe61.length){
+      // svuoto l'array
+      while(nomiEstratti.length){
+        console.log(nomiEstratti);
+        console.log(nomiEstratti.length);
+        console.log('--------------');
+        nomiEstratti.pop();
+      }
+    }
+
+    // se questo flag non cambia vuol dire che il nome non è stato mai estratto qundi non parte il ciclo
+    nomeEstratto = false;
+    let random = Math.floor(Math.random() * classe61.length);
+    nome = classe61[random];
+
+      
+    console.log(nome);
+    console.log(nomiEstratti);
+    console.log("=============");
+
+    // effettuo il controllo della presenza del nome estratto solo se l'array dei nomi estratti è inferione a quello originale
+    // se non faccio questo controllo dopo aver stratto tutti i nomi creerei un loo infinito
+    if(nomiEstratti.length < classe61.length){
+      for(let i = 0; i < nomiEstratti.length; i++){
+      // se il nome estratto è uguale a un elemento dei nomei stratti
+      // memorizzo il date che è presente
+        if(nome === nomiEstratti[i]){
+          // il nome è stato estratto quindi ricomicierà il ciclo
+          nomeEstratto = true;
+          console.log('PRESENTE');
+        }
+      }
+    }else{
+      // imposto l'output per ricominciare
+      nome = "Nomi esauriti";
+      bottoneEstrai.innerHTML = 'Ricomincia';
+    }
+    
+    if(!nomeEstratto){
+      // se nonè stato estratto il nome lo pusho
+      nomiEstratti.push(nome);
+    }
+    
+    console.log(nomiEstratti);
+  }while(nomeEstratto)
+
+  document.getElementById('nome-estratto').innerHTML = nome;
+
+  
+
+});
+
+
+
+/// logica per cacolare il nome più lungo
 let nomePiuLungo = '';
 
 for(let i = 0; i < classe61.length; i++){
@@ -48,46 +116,5 @@ for(let i = 0; i < classe61.length; i++){
   }
 }
 //console.log('--->>>>> nomePiuLungo',nomePiuLungo);
-
-const bottoneEstrai = document.getElementById('estrai');
-
-
-// elenco di nomi estratti che di defaul è vuoto
-const nomiEstratti = [];
-bottoneEstrai.addEventListener('click', function(){
-
-  let random = Math.floor(Math.random() * classe61.length);
-  const nome = classe61[random];
-  console.log(nome);
-  console.log(nomiEstratti);
-  console.log("=============");
-  
-  // di dafault stabilisco che il mio nome non sia presnte
-  let nomePresente = false;
-  // cerco il nome estratto dentro l'array dei nomi estratti
-  for(let i = 0; i < nomiEstratti.length; i++){
-    // se il nome estratto è uguale a un elemento dei nomei stratti
-    // memorizzo il date che è presente
-    if(nome === nomiEstratti[i]){
-      nomePresente = true;
-    }
-  }
-
-  // se il nome non è presente lo pusho nell'array e lo stampo
-  if(!nomePresente){
-    nomiEstratti.push(nome);
-    console.log(nome);
-    document.getElementById('nome-estratto').innerHTML = nome;
-  }else{
-    // se non è presente genero un altro output
-    document.getElementById('nome-estratto').innerHTML = 'Nome presente, estraine un\'altro';
-  }
-
-  
-
-});
-
-
-
 
 
