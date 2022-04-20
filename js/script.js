@@ -63,7 +63,7 @@ bottoneEstrai.addEventListener('click', function(){
 
     // se questo flag non cambia vuol dire che il nome non è stato mai estratto qundi non parte il ciclo
     nomeEstratto = false;
-    let random = Math.floor(Math.random() * classe61.length);
+    let random = getRandomNumber(0, classe61.length - 1);
     nome = classe61[random];
 
       
@@ -118,3 +118,9 @@ for(let i = 0; i < classe61.length; i++){
 //console.log('--->>>>> nomePiuLungo',nomePiuLungo);
 
 
+// functions
+function getRandomNumber(min, max){
+
+  return  Math.floor(Math.random() * (max - min +1) + min );
+
+}
